@@ -95,7 +95,7 @@ footer a:hover {
 
 .mainWrap {
   display: grid;
-  grid-template-columns: 230px 1fr;
+  grid-template-columns: 2fr 6.5fr 3.5fr;
   height: 100vh;
 }
 
@@ -105,6 +105,11 @@ footer a:hover {
   color: white;
   display: flex;
   flex-direction: column;
+  border-right: 1px solid whitesmoke;
+}
+
+.editorWrap {
+  border-right: 1px solid whitesmoke;
 }
 
 .asideInner {
@@ -144,8 +149,67 @@ footer a:hover {
 }
 
 .CodeMirror {
-  min-height: 98vh;
+  min-height: 89vh;
   font-size: 20px;
   line-height: 1.6;
   padding-top: 20px;
+}
+
+.navbar {
+  height: 4rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: white;
+  border-bottom: 1px solid whitesmoke;
+}
+
+.fontSizeSelect {
+  display: flex;
+  align-items: center;
+}
+
+.InputOutput {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.input {
+  width: 100%;
+  height: 50vh;
+  border-bottom: 1px solid whitesmoke;
+}
+
+.output {
+  width: 100%;
+  height: 50vh;
+}
+
+.inputHead,
+.outputHead {
+  display: flex;
+  justify-content: center;
+  height: 65px;
+}
+
+.inputHead h2,
+.outputHead h2 {
+  display: inline-block;
+  border-bottom: 1px solid white;
+}
+
+.inputText,
+.outputText {
+  display: flex;
+  height: 41vh;
+}
+
+.inputText textarea,
+.outputText textarea {
+  width: 100%;
+  background-color: #282a36;
+  border: none
 }

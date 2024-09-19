@@ -10,6 +10,7 @@ import {
   useParams,
 } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import Navbar from "../components/Navbar";
 
 const EditorPage = () => {
   const socketRef = useRef(null);
@@ -109,6 +110,7 @@ const EditorPage = () => {
         </button>
       </div>
       <div className="editorWrap">
+        <Navbar />
         <Editor
           socketRef={socketRef}
           roomId={roomId}
@@ -116,6 +118,24 @@ const EditorPage = () => {
             codeRef.current = code;
           }}
         />
+      </div>
+      <div className="InputOutput">
+        <div className="input">
+          <div className="inputHead">
+            <h2>Input</h2>
+          </div>
+          <div className="inputText">
+            <textarea></textarea>
+          </div>
+        </div>
+        <div className="output">
+          <div className="outputHead">
+            <h2>Output</h2>
+          </div>
+          <div className="outputText">
+            <textarea></textarea>
+          </div>
+        </div>
       </div>
     </div>
   );
