@@ -13,6 +13,7 @@ import { toast } from "react-hot-toast";
 
 const EditorPage = () => {
   const socketRef = useRef(null);
+  const codeRef = useRef(null);
   const location = useLocation();
   const reactNavigator = useNavigate();
   const { roomId } = useParams();
@@ -46,6 +47,11 @@ const EditorPage = () => {
             console.log(`${username} joined`);
           }
           setClients(clients);
+
+          socketRef.current.emit(ACTIONS.SYNC_CODE, {
+            code: codeRef.current,
+            socketId,
+          });
         }
       );
       // Listening for disconnected
@@ -62,7 +68,7 @@ const EditorPage = () => {
       socketRef.current.off(ACTIONS.JOINED);
       socketRef.current.off(ACTIONS.DISCONNECTED);
     };
-  }, [location.state?.username, roomId, reactNavigator]);
+  }, []);
 
   async function copyRoomId(e) {
     try {
@@ -103,7 +109,13 @@ const EditorPage = () => {
         </button>
       </div>
       <div className="editorWrap">
-        <Editor socketRef={socketRef} roomId={roomId} />
+        <Editor
+          socketRef={socketRef}
+          roomId={roomId}
+          onCodeChange={(code) => {
+            codeRef.current = code;
+          }}
+        />
       </div>
     </div>
   );
