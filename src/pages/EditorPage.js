@@ -18,8 +18,10 @@ const EditorPage = () => {
   const location = useLocation();
   const reactNavigator = useNavigate();
   const { roomId } = useParams();
-
   const [clients, setClients] = useState([]);
+  const [theme, setTheme] = useState("dark");
+  const [fontSize, setFontSize] = useState(18);
+  const [language, setLanguage] = useState("cpp");
 
   useEffect(() => {
     const init = async () => {
@@ -88,6 +90,35 @@ const EditorPage = () => {
     return <Navigate to="/" />;
   }
 
+  const handleLanguageChange = (event) => {
+    setLanguage(event.target.value);
+  };
+
+  const handleFontSizeChange = (event) => {
+    setFontSize(event.target.value);
+  };
+
+  const handleThemeChange = (event) => {
+    setTheme(event.target.value);
+  };
+
+  if (theme === "dark") {
+    document.documentElement.style.setProperty("--background-color", "#1c1e29");
+    document.documentElement.style.setProperty("--text-color", "#fff");
+    document.documentElement.style.setProperty(
+      "--input-output-color",
+      "#282a36"
+    );
+    document.documentElement.style.setProperty("--border-color", "whitesmoke");
+    document.documentElement.style.setProperty("--logo-color", "#1c1e29");
+  } else {
+    document.documentElement.style.setProperty("--background-color", "#f8f8f8");
+    document.documentElement.style.setProperty("--text-color", "#000");
+    document.documentElement.style.setProperty("--input-output-color", "#fff");
+    document.documentElement.style.setProperty("--border-color", "grey");
+    document.documentElement.style.setProperty("--logo-color", "#484a4f");
+  }
+
   return (
     <div className="mainWrap">
       <div className="aside">
@@ -110,13 +141,23 @@ const EditorPage = () => {
         </button>
       </div>
       <div className="editorWrap">
-        <Navbar />
+        <Navbar
+          theme={theme}
+          handleThemeChange={handleThemeChange}
+          language={language}
+          handleLanguageChange={handleLanguageChange}
+          fontSize={fontSize}
+          handleFontSizeChange={handleFontSizeChange}
+        />
         <Editor
           socketRef={socketRef}
           roomId={roomId}
           onCodeChange={(code) => {
             codeRef.current = code;
           }}
+          fontSize={fontSize}
+          theme={theme}
+          language={language}
         />
       </div>
       <div className="InputOutput">
