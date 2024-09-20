@@ -1,3 +1,11 @@
+:root {
+  --background-color: #1c1e29;
+  --text-color: #fff;
+  --input-output-color: #282a36;
+  --border-color: whitesmoke;
+  --logo-color: #1c1e29;
+}
+
 .homePageWrapper {
   height: 100vh;
   display: flex;
@@ -63,6 +71,11 @@ footer a {
   transition: all 0.3s ease-in-out;
 }
 
+.copyBtn {
+  background: white;
+  border: 1px solid var(--border-color);
+}
+
 .joinBtn,
 .leaveBtn {
   background: #4aed88;
@@ -97,19 +110,21 @@ footer a:hover {
   display: grid;
   grid-template-columns: 2fr 6.5fr 3.5fr;
   height: 100vh;
+  overflow: hidden;
 }
 
 .aside {
-  background: #1c1e29;
+  background: var(--background-color);
   padding: 16px;
-  color: white;
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
-  border-right: 1px solid whitesmoke;
+  border-right: 1px solid var(--border-color);
 }
 
 .editorWrap {
-  border-right: 1px solid whitesmoke;
+  overflow-x: auto;
+  border-right: 1px solid var(--border-color);
 }
 
 .asideInner {
@@ -137,6 +152,7 @@ footer a:hover {
 .logo {
   border-bottom: 1px solid #424242;
   padding-bottom: 10px;
+  background: var(--logo-color);
 }
 
 .logoImage {
@@ -149,10 +165,9 @@ footer a:hover {
 }
 
 .CodeMirror {
-  min-height: 89vh;
+  min-height: 92vh;
   font-size: 20px;
   line-height: 1.6;
-  padding-top: 20px;
 }
 
 .navbar {
@@ -161,8 +176,9 @@ footer a:hover {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  color: white;
-  border-bottom: 1px solid whitesmoke;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .fontSizeSelect {
@@ -174,16 +190,18 @@ footer a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white;
+  color: var(--text-color);
 }
 
 .input {
+  background-color: var(--background-color);
   width: 100%;
   height: 50vh;
-  border-bottom: 1px solid whitesmoke;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .output {
+  background-color: var(--background-color);
   width: 100%;
   height: 50vh;
 }
@@ -195,21 +213,15 @@ footer a:hover {
   height: 65px;
 }
 
-.inputHead h2,
-.outputHead h2 {
-  display: inline-block;
-  border-bottom: 1px solid white;
-}
-
 .inputText,
 .outputText {
   display: flex;
-  height: 41vh;
+  height: 40vh;
 }
 
 .inputText textarea,
 .outputText textarea {
   width: 100%;
-  background-color: #282a36;
+  background-color: var(--input-output-color);
   border: none
 }
