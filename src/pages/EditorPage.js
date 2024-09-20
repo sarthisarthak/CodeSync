@@ -11,6 +11,8 @@ import {
 } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import Navbar from "../components/Navbar";
+import Input from "../components/Input";
+import Output from "../components/Output";
 
 const EditorPage = () => {
   const socketRef = useRef(null);
@@ -44,19 +46,22 @@ const EditorPage = () => {
       // Listening for JOINED Event
       socketRef.current.on(
         ACTIONS.JOINED,
-        ({ clients, username, socketId }) => {
+        ({ clients, username, socketId, language }) => {
           if (username !== location.state?.username) {
             toast.success(`${username} joined the room.`);
             console.log(`${username} joined`);
           }
           setClients(clients);
-
+          setLanguage(language);
           socketRef.current.emit(ACTIONS.SYNC_CODE, {
             code: codeRef.current,
             socketId,
           });
         }
       );
+      socketRef.current.on(ACTIONS.LANGUAGE_CHANGE, ({ language }) => {
+        setLanguage(language);
+      });
       // Listening for disconnected
       socketRef.current.on(ACTIONS.DISCONNECTED, ({ socketId, username }) => {
         toast.success(`${username} left the room.`);
@@ -161,22 +166,8 @@ const EditorPage = () => {
         />
       </div>
       <div className="InputOutput">
-        <div className="input">
-          <div className="inputHead">
-            <h2>Input</h2>
-          </div>
-          <div className="inputText">
-            <textarea></textarea>
-          </div>
-        </div>
-        <div className="output">
-          <div className="outputHead">
-            <h2>Output</h2>
-          </div>
-          <div className="outputText">
-            <textarea></textarea>
-          </div>
-        </div>
+        <Input />
+        <Output />
       </div>
     </div>
   );

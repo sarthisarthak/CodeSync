@@ -10,6 +10,7 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 const userSocketMap = {};
+const roomLanguageMap = {};
 
 function getAllConnectedClients(roomId) {
   //Map
@@ -32,11 +33,15 @@ io.on("connection", (socket) => {
     socket.join(roomId);
     const clients = getAllConnectedClients(roomId);
     // console.log(clients);
+    if (!roomLanguageMap[roomId]) {
+      roomLanguageMap[roomId] = "cpp";
+    }
     clients.forEach(({ socketId }) => {
       io.to(socketId).emit(ACTIONS.JOINED, {
         clients,
         username: username,
         socketId: socket.id,
+        language: roomLanguageMap[roomId],
       });
     });
 
@@ -46,6 +51,11 @@ io.on("connection", (socket) => {
 
     socket.on(ACTIONS.SYNC_CODE, ({ socketId, code }) => {
       io.to(socketId).emit(ACTIONS.CODE_CHANGE, { code });
+    });
+
+    socket.on(ACTIONS.LANGUAGE_CHANGE, ({ roomId, language }) => {
+      roomLanguageMap[roomId] = language;
+      socket.in(roomId).emit(ACTIONS.LANGUAGE_CHANGE, { language });
     });
 
     socket.on("disconnecting", () => {

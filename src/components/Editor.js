@@ -70,9 +70,9 @@ const Editor = ({
       const mode = getCodeMirrorMode(language);
       editorRef.current.setOption("mode", { name: mode });
     }
-    //  if (socketRef.current) {
-    //    socketRef.current.emit(ACTIONS.LANGUAGE_CHANGE, { roomId, language });
-    //  }
+    if (socketRef.current) {
+      socketRef.current.emit(ACTIONS.LANGUAGE_CHANGE, { roomId, language });
+    }
   }, [language]);
 
   useEffect(() => {
