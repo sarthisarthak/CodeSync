@@ -128,6 +128,9 @@ io.on("connection", (socket) => {
         output: roomOutputMap[roomId],
       });
     });
+    socket.on(ACTIONS.LOADING_CHANGE, ({ roomId, loading }) => {
+      socket.in(roomId).emit(ACTIONS.LOADING_CHANGE, { loading });
+    });
 
     socket.on("disconnecting", () => {
       const rooms = [...socket.rooms];

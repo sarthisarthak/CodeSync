@@ -251,3 +251,8 @@ footer a:hover {
   text-align: center;
   border: 1px solid var(--border-color);
 }
+
+.loader {
+  width: 100%;
+  height: 90%;
+}
