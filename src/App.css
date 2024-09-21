@@ -213,15 +213,41 @@ footer a:hover {
   height: 65px;
 }
 
-.inputText,
-.outputText {
+.inputText {
   display: flex;
   height: 40vh;
+}
+
+.outputText {
+  display: flex;
+  height: 42vh;
 }
 
 .inputText textarea,
 .outputText textarea {
   width: 100%;
   background-color: var(--input-output-color);
-  border: none
+  border: var(--background-color);
+  color: var(--text-color);
+  font-size: large;
+}
+
+.runBtn {
+  position: absolute;
+  bottom: 20px;
+  right: 30vw;
+  width: 75px;
+  background-color: #4aed88;
+  color: black;
+  border: 1px solid var(--border-color);
+}
+
+.clearBtn {
+  position: absolute;
+  bottom: 22px;
+  right: 1.5vw;
+  width: 70px;
+  color: black;
+  text-align: center;
+  border: 1px solid var(--border-color);
 }

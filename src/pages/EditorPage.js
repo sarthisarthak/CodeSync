@@ -17,6 +17,7 @@ import Output from "../components/Output";
 const EditorPage = () => {
   const socketRef = useRef(null);
   const codeRef = useRef(null);
+  const inputRef = useRef(null);
   const location = useLocation();
   const reactNavigator = useNavigate();
   const { roomId } = useParams();
@@ -56,6 +57,15 @@ const EditorPage = () => {
           socketRef.current.emit(ACTIONS.SYNC_CODE, {
             code: codeRef.current,
             socketId,
+          });
+
+          socketRef.current.emit(ACTIONS.SYNC_INPUT, {
+            socketId,
+            roomId,
+          });
+          socketRef.current.emit(ACTIONS.SYNC_OUTPUT, {
+            socketId,
+            roomId,
           });
         }
       );
@@ -166,8 +176,14 @@ const EditorPage = () => {
         />
       </div>
       <div className="InputOutput">
-        <Input />
-        <Output />
+        <Input inputRef={inputRef} socketRef={socketRef} roomId={roomId} />
+        <Output
+          socketRef={socketRef}
+          roomId={roomId}
+          inputRef={inputRef}
+          codeRef={codeRef}
+          language={language}
+        />
       </div>
     </div>
   );
